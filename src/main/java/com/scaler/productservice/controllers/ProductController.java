@@ -5,7 +5,6 @@ import com.scaler.productservice.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -29,9 +28,7 @@ public class ProductController {
 
     @PostMapping()
     public Product addNewProduct(@RequestBody Product product){
-        Product p =new Product();
-        p.setTitle("Added new Product");
-        return p;
+        return productService.addNewProduct(product);
     }
 
     @PatchMapping("/{id}")
@@ -45,5 +42,10 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteProduct(@PathVariable("id") Long id){ }
+    public Product deleteProduct(@PathVariable("id") Long id){
+        return productService.deleteProduct(id);
+//        Product deletedProduct = productService.deleteProduct(id);
+//        productService.deleteProduct(id);
+//        return ResponseEntity.ok(deletedProduct);
+    }
 }
